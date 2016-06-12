@@ -3,8 +3,8 @@
  * GS1 code generator
  * GTIN parser for Sweden
  *
- * @version 1.0
- * @date 2016-05-22
+ * @version 1.1
+ * @date 2016-06-10
  */
 
 namespace Gs1\Parser;
@@ -48,7 +48,7 @@ class Sweden implements ParserInterface {
         case 2:
           // Weight or price
           if ($code[1] >= 0 && $code[1] <= 2) {
-            $divider = self::$dividers[intval($code[1])];
+            $divider = self::$price_dividers[intval($code[1])];
             $price = intval(substr($code, 8, 4));
 
             return new PriceProduct(substr($code, 2, 6), ($divider == 0 ? $price : $price / $divider));
