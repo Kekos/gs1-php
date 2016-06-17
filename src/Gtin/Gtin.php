@@ -3,11 +3,13 @@
  * GS1 code generator
  * GTIN Entity
  *
- * @version 1.0
- * @date 2016-05-22
+ * @version 1.1
+ * @date 2016-06-17
  */
 
 namespace Gs1\Gtin;
+
+use Gs1\Exception\ArgumentException;
 
 abstract class Gtin {
 
