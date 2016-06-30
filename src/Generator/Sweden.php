@@ -3,8 +3,8 @@
  * GS1 code generator
  * GTIN generator for Sweden
  *
- * @version 1.1
- * @date 2016-06-04
+ * @version 1.2
+ * @date 2016-06-28
  */
 
 namespace Gs1\Generator;
@@ -57,9 +57,15 @@ class Sweden implements GeneratorInterface {
     } else if ($entity instanceof WeightProduct) {
       $gtin = new Gtin13();
       $weight = self::toFloat($entity->getWeight());
-
       $decimals = self::getDecimalsCount($weight);
-      $decimals = max(1, min(3, $decimals));
+
+      if ($decimals === 0) {
+        $decimals = 3;
+        $weight .= '.000';
+      } else {
+        $decimals = max(1, min(3, $decimals));
+      }
+
       $modulator = self::$weight_modulators[$decimals];
       $weight = substr(str_replace('.', '', $weight), 0, 4);
 
